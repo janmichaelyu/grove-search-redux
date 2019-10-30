@@ -46,33 +46,20 @@ export const createReducer = config => {
         };
       }
       case types.VALUES_REQUESTED:
-        // eslint-disable-next-line no-console
-        console.log('VALUES_REQUESTED');
         return {
           ...state
         };
       case types.VALUES_SUCCESS: {
         const response = action.payload.response;
-        // eslint-disable-next-line no-console
-        console.log('VALUES_SUCCESS');
-        // eslint-disable-next-line no-console
-        console.log(response);
-        //TODO modify state.response.facets
         let facets = state.response.facets;
-        // eslint-disable-next-line no-console
-        console.log('facets', facets);
         let newFacets =
           response.response['values-response'] &&
           response.response['values-response']['distinct-value'];
-        // eslint-disable-next-line no-console
-        console.log('newFacets', newFacets);
         if (newFacets) {
           const facetName = response.response['values-response'].name;
           let values = facets[facetName].facetValues;
 
           newFacets.forEach(function(newFacetValue) {
-            // eslint-disable-next-line no-console
-            console.log('newFacetValue', newFacetValue);
             values.push({
               name: newFacetValue._value || 'blank',
               count: facetName.endsWith('*') ? '' : newFacetValue.frequency,
@@ -81,8 +68,6 @@ export const createReducer = config => {
           });
 
           facets[facetName].facetValues = values;
-          // eslint-disable-next-line no-console
-          console.log('facets', facets);
         }
 
         return {
@@ -94,9 +79,6 @@ export const createReducer = config => {
         };
       }
       case types.VALUES_FAILURE: {
-        const response = action.payload.response;
-        // eslint-disable-next-line no-console
-        console.log('VALUES_FAILURE', response);
         return {
           ...state,
           response: {

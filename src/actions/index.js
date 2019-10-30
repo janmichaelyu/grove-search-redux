@@ -37,14 +37,6 @@ const defaultAPI = {
   },
   showMore: (facetName, facetValues, type, stagedSearch, queryText) => {
     // name, params, options, searchState, qtext, facetObject
-    // eslint-disable-next-line no-console
-    console.log('showMore fetch', {
-      facetName: facetName,
-      facetValues: facetValues,
-      type: type,
-      stagedSearch: stagedSearch,
-      queryText: queryText
-    });
     const name = facetName;
     const facetObject = facetValues;
     // let options = {};
@@ -63,10 +55,6 @@ const defaultAPI = {
         return response.json().then(function(json) {
           let options = json.options || {};
 
-          // eslint-disable-next-line no-console
-          console.log('showMore response options', options);
-          // eslint-disable-next-line no-console
-          console.log('showMore name', name);
           let path = '';
           let collation = '';
           for (let i = 0; i < options.constraint.length; i++) {
@@ -75,10 +63,6 @@ const defaultAPI = {
               collation = options.constraint[i].range.collation;
             }
           }
-          // eslint-disable-next-line no-console
-          console.log('showMore path', path);
-          // eslint-disable-next-line no-console
-          console.log('showMore collation', collation);
           options.values = {
             name: name,
             range: {
@@ -234,11 +218,6 @@ export default config => {
     queryText,
     optionalArgs = {}
   ) => {
-    // eslint-disable-next-line no-console
-    console.log('showMore action');
-    // eslint-disable-next-line no-console
-    console.log('optionalArgs', optionalArgs);
-
     let valuesAPI = defaultAPI;
     if (optionalArgs.api) {
       valuesAPI = optionalArgs.api;
@@ -260,13 +239,9 @@ export default config => {
         )
         .then(
           data => {
-            // eslint-disable-next-line no-console
-            console.log('showMore data', data);
             dispatch(receiveSuccessfulValues(data, optionalArgs));
           },
           error => {
-            // eslint-disable-next-line no-console
-            console.log('showMore error', error);
             dispatch({
               type: types.VALUES_FAILURE,
               payload: {
