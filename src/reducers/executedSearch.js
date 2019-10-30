@@ -151,8 +151,6 @@ export const selectors = {
   // From search response
   // getSearchResponse: getSearchResponse,
   getSearchResults: state => getFromSearchResponse(state, 'results') || [],
-  // TODO apply changes for facets from ValuesAPI
-
   searchFacets: state => getFromSearchResponse(state, 'facets'),
   getSearchTotal: getSearchTotal,
   getSearchExecutionTime: state =>
